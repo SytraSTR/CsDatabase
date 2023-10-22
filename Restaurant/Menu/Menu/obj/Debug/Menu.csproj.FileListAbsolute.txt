@@ -1,0 +1,12 @@
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\Menu.csproj.AssemblyReference.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\Menu.Form1.resources
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\Menu.csproj.GenerateResource.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\Menu.csproj.CoreCompileInputs.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\Menu.csproj.CopyComplete
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\bin\Debug\RestaurantMenu.exe.config
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\bin\Debug\RestaurantMenu.exe
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\bin\Debug\RestaurantMenu.pdb
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\RestaurantMenu.Properties.Resources.resources
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\RestaurantMenu.exe
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\Menu\Menu\obj\Debug\RestaurantMenu.pdb
