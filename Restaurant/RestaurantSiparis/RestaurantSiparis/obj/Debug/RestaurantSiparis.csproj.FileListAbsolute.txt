@@ -1,0 +1,12 @@
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\bin\Debug\RestaurantSiparis.exe.config
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\bin\Debug\RestaurantSiparis.exe
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\bin\Debug\RestaurantSiparis.pdb
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.csproj.AssemblyReference.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.Form1.resources
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.Properties.Resources.resources
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.csproj.GenerateResource.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.csproj.CoreCompileInputs.cache
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.csproj.CopyComplete
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.exe
+C:\Users\Sytra\Desktop\CsDataBase\Restaurant\RestaurantSiparis\RestaurantSiparis\obj\Debug\RestaurantSiparis.pdb
