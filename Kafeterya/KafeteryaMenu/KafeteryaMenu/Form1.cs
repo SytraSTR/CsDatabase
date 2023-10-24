@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,38 +22,39 @@ namespace KafeteryaMenu
             InitializeComponent();
         }
 
-        int Move;
+        int MMove;
         int Mouse_X;
         int Mouse_Y;
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Yenile();
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            Move = 1;
+            MMove = 1;
             Mouse_X = e.X;
             Mouse_Y = e.Y;
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Move == 1)
+            if (MMove == 1)
             {
                 this.SetDesktopLocation(MousePosition.X - Mouse_X, MousePosition.Y - Mouse_Y);
             }
         }
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            Move = 0;
+            MMove = 0;
         }
 
         static string ConString =
             "Data Source=DESKTOP-5J370CT\\SYTRA;" +
             "Initial Catalog=Kafeterya;Integrated Security=True";
-        SqlConnection Baglanti = new SqlConnection(ConString);
+        SqlConnection Connect = new SqlConnection(ConString);
 
-        SqlDataAdapter Da = new SqlDataAdapter();
-        DataSet Ds = new DataSet();
+        SqlDataAdapter Da;
+        DataSet Ds;
+        DataTable Dt; 
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -74,37 +76,51 @@ namespace KafeteryaMenu
                     string Sorgu =
                         "SELECT COUNT(*) FROM " +
                         "KafeteryaMenu WHERE FoodName = @fName";
-                    SqlCommand Command = new SqlCommand(Sorgu, Baglanti);
-                    Command.Parameters.Add("@fName",
+                    SqlCommand CmdSorgu = new SqlCommand(Sorgu, Connect);
+                    CmdSorgu.Parameters.Add("@fName",
                         SqlDbType.VarChar).Value = fName;
 
-                    Baglanti.Open();
-                    int SorguSonucu = (int)Command.ExecuteScalar();
-                    Baglanti.Close();
-
+                    Connect.Open();
+                    int SorguSonucu = (int)CmdSorgu.ExecuteScalar();
+                    Connect.Close();
+                    
                     if (SorguSonucu == 0)
                     {
                         string Kayit =
                             "INSERT INTO " +
                             "KafeteryaMenu (FoodIncentives, FoodName) " +
                             "VALUES (@fInc, @FoodName)";
-                        SqlCommand Command1 = new SqlCommand(Kayit, Baglanti);
+                        SqlCommand CmdKayit = new SqlCommand(Kayit, Connect);
 
-                        Command1.Parameters.Add("@fInc",
+                        CmdKayit.Parameters.Add("@fInc",
                             SqlDbType.VarChar).Value = fInc;
-                        Command1.Parameters.Add("@FoodName",
+                        CmdKayit.Parameters.Add("@FoodName",
                             SqlDbType.VarChar).Value = fName;
 
-                        Baglanti.Open();
-                        Command1.ExecuteNonQuery();
-                        Baglanti.Close();
-
-                        MessageBox.Show("Menü kaydedilmiştir.", "Bilgi");
+                        Connect.Open();
+                        CmdKayit.ExecuteNonQuery();
+                        Connect.Close();
+                        
+                        MessageBox.Show(fInc + " | " + fName + 
+                            " Menüye kaydedilmiştir.", "Bilgi");
+                        Yenile();
                         Sil();
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + " zaten mevcut.");
+                        string Read = "SELECT * FROM KafeteryaMenu " +
+                            "Where FoodName = @fName";
+                        
+                        SqlCommand ComReader = new SqlCommand(Read, Connect);
+                        ComReader.Parameters.Add("@fName",
+                            SqlDbType.VarChar).Value = fName;
+
+                        Connect.Open();
+                        SqlDataReader DataReader = ComReader.ExecuteReader();
+                        DataReader.Read();
+                        MessageBox.Show(DataReader["FoodIncentives"] + " | " + fName + " zaten mevcut.");
+                        DataReader.Close();
+                        Connect.Close();
                     }
                 }
                 else
@@ -117,7 +133,7 @@ namespace KafeteryaMenu
                 MessageBox.Show("Bir hatayla karşılaştınız;" + Hata.Message, "Hata",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }       
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             string fInc = "";
@@ -130,29 +146,52 @@ namespace KafeteryaMenu
                       radioButton5.Checked ? radioButton5.Text : "";
 
             fName = textBox1.Text;
+
             string Sorgu = "SELECT COUNT(*) FROM KafeteryaMenu WHERE FoodName = @fName";
-            SqlCommand Command = new SqlCommand(Sorgu, Baglanti);
-            Command.Parameters.Add("@fName",
+            SqlCommand CmdSorgu = new SqlCommand(Sorgu, Connect);
+            CmdSorgu.Parameters.Add("@fName",
                 SqlDbType.VarChar).Value = fName;
 
-            Baglanti.Open();
-            int SorguSonucu = (int)Command.ExecuteScalar();
-            Baglanti.Close();
+            Connect.Open();
+            int SorguSonucu = (int)CmdSorgu.ExecuteScalar();
+            Connect.Close();
 
             if (SorguSonucu == 1)
             {
-                string Update = "UPDATE kafeteryaMenu set FoodIncentives=@fInc " +
-                    "WHERE FoodName=@fName";
-                SqlCommand komut = new SqlCommand(Update, Baglanti);
+                string Sorgu1 = "SELECT COUNT(*) FROM KafeteryaMenu " +
+                    "WHERE FoodName = @fName1 AND Foodıncentives = @fInc1";
+                SqlCommand CmdSorgu1 = new SqlCommand(Sorgu1, Connect);
+                CmdSorgu1.Parameters.Add("@fName1",
+                    SqlDbType.VarChar).Value = fName;
+                CmdSorgu1.Parameters.Add("@fInc1",
+                    SqlDbType.VarChar).Value = fInc;
 
-                komut.Parameters.AddWithValue("@fInc", fInc);
-                komut.Parameters.AddWithValue("@fName", fName);
+                Connect.Open();
+                int SorguSonucu1 = (int)CmdSorgu1.ExecuteScalar();
+                Connect.Close();
 
-                Baglanti.Open();
-                komut.ExecuteNonQuery();
-                Baglanti.Close();
+                if (SorguSonucu1 == 0)
+                {
+                    string Update = "UPDATE kafeteryaMenu set FoodIncentives = @fInc " +
+                    "WHERE FoodName = @fName";
+                    SqlCommand CmdGuncelle = new SqlCommand(Update, Connect);
 
-                MessageBox.Show("Müşteri Bilgileri Güncellendi.");
+                    CmdGuncelle.Parameters.AddWithValue("@fInc", fInc);
+                    CmdGuncelle.Parameters.AddWithValue("@fName", fName);
+
+                    Connect.Open();
+                    CmdGuncelle.ExecuteNonQuery();
+                    Connect.Close();
+
+                    MessageBox.Show("Müşteri Bilgileri Güncellendi.");
+
+                    Yenile();
+                    Sil();
+                }
+                else
+                {
+                    MessageBox.Show(fInc + " " + fName + " Zaten doğru şekilde kaydedilmiştir");
+                }
             }
             else
             {
@@ -187,6 +226,15 @@ namespace KafeteryaMenu
                 textBox1.SelectionStart = textBox1.Text.Length;
             }
         }
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = Dt.DefaultView;
+
+            string filterExpression = string.Format("FoodName LIKE '{0}%'", textBox2.Text);
+            dv.RowFilter = filterExpression;
+
+            dataGridView1.DataSource = dv;
+        }
 
         private void radioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -210,11 +258,14 @@ namespace KafeteryaMenu
             { Close(); }
         }
 
-
-
         public void Yenile()
         {
-
+            Da = new SqlDataAdapter("Select * From KafeteryaMenu", Connect);
+            Connect.Open();
+            Dt = new DataTable();
+            Da.Fill(Dt);
+            dataGridView1.DataSource = Dt;
+            Connect.Close();
         }
 
         public void Sil()
@@ -231,7 +282,5 @@ namespace KafeteryaMenu
 
             ActiveControl = null;
         }
-
-
     }
 }

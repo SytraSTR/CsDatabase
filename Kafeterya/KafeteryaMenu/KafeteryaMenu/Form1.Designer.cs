@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -43,8 +43,6 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.foodIncentivesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.foodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kafeteryaMenuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.kafeteryaDataSet = new KafeteryaMenu.KafeteryaDataSet();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -53,6 +51,8 @@
             this.kafeteryaDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.kafeteryaDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.kafeteryaMenuTableAdapter = new KafeteryaMenu.KafeteryaDataSetTableAdapters.KafeteryaMenuTableAdapter();
+            this.foodIncentivesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.foodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kafeteryaMenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kafeteryaDataSet)).BeginInit();
@@ -171,35 +171,35 @@
             // 
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.foodIncentivesDataGridViewTextBoxColumn,
             this.foodNameDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.kafeteryaMenuBindingSource;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(122, 204);
             this.dataGridView1.MultiSelect = false;
@@ -214,20 +214,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(322, 150);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.TabStop = false;
-            // 
-            // foodIncentivesDataGridViewTextBoxColumn
-            // 
-            this.foodIncentivesDataGridViewTextBoxColumn.DataPropertyName = "FoodIncentives";
-            this.foodIncentivesDataGridViewTextBoxColumn.HeaderText = "FoodIncentives";
-            this.foodIncentivesDataGridViewTextBoxColumn.Name = "foodIncentivesDataGridViewTextBoxColumn";
-            this.foodIncentivesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // foodNameDataGridViewTextBoxColumn
-            // 
-            this.foodNameDataGridViewTextBoxColumn.DataPropertyName = "FoodName";
-            this.foodNameDataGridViewTextBoxColumn.HeaderText = "FoodName";
-            this.foodNameDataGridViewTextBoxColumn.Name = "foodNameDataGridViewTextBoxColumn";
-            this.foodNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // kafeteryaMenuBindingSource
             // 
@@ -245,6 +231,8 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(322, 20);
             this.textBox2.TabIndex = 15;
+            this.textBox2.TabStop = false;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button2
             // 
@@ -280,6 +268,20 @@
             // kafeteryaMenuTableAdapter
             // 
             this.kafeteryaMenuTableAdapter.ClearBeforeFill = true;
+            // 
+            // foodIncentivesDataGridViewTextBoxColumn
+            // 
+            this.foodIncentivesDataGridViewTextBoxColumn.DataPropertyName = "FoodIncentives";
+            this.foodIncentivesDataGridViewTextBoxColumn.HeaderText = "Gıda Türü";
+            this.foodIncentivesDataGridViewTextBoxColumn.Name = "foodIncentivesDataGridViewTextBoxColumn";
+            this.foodIncentivesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // foodNameDataGridViewTextBoxColumn
+            // 
+            this.foodNameDataGridViewTextBoxColumn.DataPropertyName = "FoodName";
+            this.foodNameDataGridViewTextBoxColumn.HeaderText = "Gıda Adı";
+            this.foodNameDataGridViewTextBoxColumn.Name = "foodNameDataGridViewTextBoxColumn";
+            this.foodNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // Form1
             // 
