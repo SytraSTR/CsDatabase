@@ -19,6 +19,7 @@ namespace KafeteryaMenu
         {
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -33,22 +34,22 @@ namespace KafeteryaMenu
         {
             try
             {
-                string tur = "";
+                string fInc = "";
                 string fName = "";
 
-                tur = radioButton1.Checked ? radioButton1.Text :
-                        radioButton2.Checked ? radioButton2.Text :
-                        radioButton3.Checked ? radioButton3.Text :
-                        radioButton4.Checked ? radioButton4.Text :
-                        radioButton5.Checked ? radioButton5.Text : "";
+                fInc = radioButton1.Checked ? radioButton1.Text :
+                          radioButton2.Checked ? radioButton2.Text :
+                          radioButton3.Checked ? radioButton3.Text :
+                          radioButton4.Checked ? radioButton4.Text :
+                          radioButton5.Checked ? radioButton5.Text : "";
 
                 fName = textBox1.Text;
 
-                if (tur != "" && fName != "")
+                if (fInc != "" && fName != "")
                 {
                     string Sorgu = 
                         "SELECT COUNT(*) FROM " +
-                        "KafeteryaMenu WHERE FoodName = @fNamew";
+                        "KafeteryaMenu WHERE FoodName = @fName";
                     SqlCommand Command = new SqlCommand(Sorgu, Baglanti);
                     Command.Parameters.Add("@fName", 
                         SqlDbType.VarChar).Value = fName;
@@ -61,11 +62,12 @@ namespace KafeteryaMenu
                     {
                         string Kayit = 
                             "INSERT INTO " +
-                            "KafeteryaMenu (Tur, FoodName) VALUES (@tur, @FoodName)";
+                            "KafeteryaMenu (FoodIncentives, FoodName) " +
+                            "VALUES (@fInc, @FoodName)";
                         SqlCommand Command1 = new SqlCommand(Kayit, Baglanti);
 
-                        Command1.Parameters.Add("@tur", 
-                            SqlDbType.VarChar).Value = tur;
+                        Command1.Parameters.Add("@fInc", 
+                            SqlDbType.VarChar).Value = fInc;
                         Command1.Parameters.Add("@FoodName", 
                             SqlDbType.VarChar).Value = fName;
 
@@ -132,6 +134,7 @@ namespace KafeteryaMenu
                 textBox1.SelectionStart = textBox1.Text.Length;
             }
         }
+
         private void radioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = radioButton1.Checked || radioButton2.Checked ||
