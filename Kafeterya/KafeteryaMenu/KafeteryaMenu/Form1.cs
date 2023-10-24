@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KafeteryaMenu
@@ -70,11 +71,11 @@ namespace KafeteryaMenu
 
                 if (fInc != "" && fName != "")
                 {
-                    string Sorgu = 
+                    string Sorgu =
                         "SELECT COUNT(*) FROM " +
                         "KafeteryaMenu WHERE FoodName = @fName";
                     SqlCommand Command = new SqlCommand(Sorgu, Baglanti);
-                    Command.Parameters.Add("@fName", 
+                    Command.Parameters.Add("@fName",
                         SqlDbType.VarChar).Value = fName;
 
                     Baglanti.Open();
@@ -83,15 +84,15 @@ namespace KafeteryaMenu
 
                     if (SorguSonucu == 0)
                     {
-                        string Kayit = 
+                        string Kayit =
                             "INSERT INTO " +
                             "KafeteryaMenu (FoodIncentives, FoodName) " +
                             "VALUES (@fInc, @FoodName)";
                         SqlCommand Command1 = new SqlCommand(Kayit, Baglanti);
 
-                        Command1.Parameters.Add("@fInc", 
+                        Command1.Parameters.Add("@fInc",
                             SqlDbType.VarChar).Value = fInc;
-                        Command1.Parameters.Add("@FoodName", 
+                        Command1.Parameters.Add("@FoodName",
                             SqlDbType.VarChar).Value = fName;
 
                         Baglanti.Open();
@@ -103,7 +104,7 @@ namespace KafeteryaMenu
                     }
                     else
                     {
-                        MessageBox.Show( textBox1.Text + " zaten mevcut.");
+                        MessageBox.Show(textBox1.Text + " zaten mevcut.");
                     }
                 }
                 else
@@ -115,6 +116,47 @@ namespace KafeteryaMenu
             {
                 MessageBox.Show("Bir hatayla karşılaştınız;" + Hata.Message, "Hata",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }       
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string fInc = "";
+            string fName = "";
+
+            fInc = radioButton1.Checked ? radioButton1.Text :
+                      radioButton2.Checked ? radioButton2.Text :
+                      radioButton3.Checked ? radioButton3.Text :
+                      radioButton4.Checked ? radioButton4.Text :
+                      radioButton5.Checked ? radioButton5.Text : "";
+
+            fName = textBox1.Text;
+            string Sorgu = "SELECT COUNT(*) FROM KafeteryaMenu WHERE FoodName = @fName";
+            SqlCommand Command = new SqlCommand(Sorgu, Baglanti);
+            Command.Parameters.Add("@fName",
+                SqlDbType.VarChar).Value = fName;
+
+            Baglanti.Open();
+            int SorguSonucu = (int)Command.ExecuteScalar();
+            Baglanti.Close();
+
+            if (SorguSonucu == 1)
+            {
+                string Update = "UPDATE kafeteryaMenu set FoodIncentives=@fInc " +
+                    "WHERE FoodName=@fName";
+                SqlCommand komut = new SqlCommand(Update, Baglanti);
+
+                komut.Parameters.AddWithValue("@fInc", fInc);
+                komut.Parameters.AddWithValue("@fName", fName);
+
+                Baglanti.Open();
+                komut.ExecuteNonQuery();
+                Baglanti.Close();
+
+                MessageBox.Show("Müşteri Bilgileri Güncellendi.");
+            }
+            else
+            {
+                MessageBox.Show("Kayıt Bulunamamıştır");
             }
         }
 
@@ -135,18 +177,6 @@ namespace KafeteryaMenu
                 textBox1.Text == "Yiyecek adı" ? Color.DimGray : Color.Black;
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Kapatmak istediğinize emin misiniz?",
-                "Kapatma onayı", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) == DialogResult.Yes)
-                { Close(); }
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBox1.Text))
@@ -164,13 +194,27 @@ namespace KafeteryaMenu
                 radioButton3.Checked || radioButton4.Checked ||
                 radioButton5.Checked ? true : false;
 
-            textBox1.Text = radioButton1.Checked ? 
+            textBox1.Text = radioButton1.Checked ?
                 "İçecek adı" : "Yiyecek adı";
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Kapatmak istediğinize emin misiniz?",
+                "Kapatma onayı", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            { Close(); }
+        }
+
+
+
         public void Yenile()
         {
-            
+
         }
 
         public void Sil()
@@ -188,6 +232,6 @@ namespace KafeteryaMenu
             ActiveControl = null;
         }
 
-        
+
     }
 }
