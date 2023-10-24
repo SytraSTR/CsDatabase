@@ -183,7 +183,19 @@ namespace KafeteryaMenu
                     CmdGuncelle.ExecuteNonQuery();
                     Connect.Close();
 
-                    MessageBox.Show("Müşteri Bilgileri Güncellendi.");
+                    string Read = "SELECT * FROM KafeteryaMenu " +
+                            "Where FoodName = @fName";
+
+                    SqlCommand ComReader = new SqlCommand(Read, Connect);
+                    ComReader.Parameters.Add("@fName",
+                        SqlDbType.VarChar).Value = fName;
+
+                    Connect.Open();
+                    SqlDataReader DataReader = ComReader.ExecuteReader();
+                    DataReader.Read();
+                    MessageBox.Show(DataReader["FoodIncentives"] + " | " + fName + " Güncellenmiştir.");
+                    DataReader.Close();
+                    Connect.Close();
 
                     Yenile();
                     Sil();
