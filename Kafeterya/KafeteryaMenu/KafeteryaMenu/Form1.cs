@@ -20,15 +20,38 @@ namespace KafeteryaMenu
             InitializeComponent();
         }
 
+        int Move;
+        int Mouse_X;
+        int Mouse_Y;
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Move = 1;
+            Mouse_X = e.X;
+            Mouse_Y = e.Y;
+        }
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Move == 1)
+            {
+                this.SetDesktopLocation(MousePosition.X - Mouse_X, MousePosition.Y - Mouse_Y);
+            }
+        }
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            Move = 0;
         }
 
         static string ConString =
             "Data Source=DESKTOP-5J370CT\\SYTRA;" +
             "Initial Catalog=Kafeterya;Integrated Security=True";
         SqlConnection Baglanti = new SqlConnection(ConString);
+
+        SqlDataAdapter Da = new SqlDataAdapter();
+        DataSet Ds = new DataSet();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -145,6 +168,11 @@ namespace KafeteryaMenu
                 "İçecek adı" : "Yiyecek adı";
         }
 
+        public void Yenile()
+        {
+            
+        }
+
         public void Sil()
         {
             radioButton1.Checked = false;
@@ -159,5 +187,7 @@ namespace KafeteryaMenu
 
             ActiveControl = null;
         }
+
+        
     }
 }
