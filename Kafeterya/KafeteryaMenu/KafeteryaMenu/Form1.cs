@@ -146,66 +146,45 @@ namespace KafeteryaMenu
 
             fName = textBox2.Text;
 
-            string Sorgu = "SELECT COUNT(*) FROM KafeteryaMenu WHERE FoodName = @fName";
-            SqlCommand CmdSorgu = new SqlCommand(Sorgu, Connect);
-            CmdSorgu.Parameters.Add("@fName",
-                SqlDbType.VarChar).Value = fName;
-
-            Connect.Open();
-            int SorguSonucu = (int)CmdSorgu.ExecuteScalar();
-            Connect.Close();
-
-            if (SorguSonucu == 1)
+            if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].Cells[1].Value != null)
             {
-                string Sorgu1 = "SELECT COUNT(*) FROM KafeteryaMenu " +
-                    "WHERE FoodName = @fName1 AND Foodıncentives = @fInc1";
-                SqlCommand CmdSorgu1 = new SqlCommand(Sorgu1, Connect);
-                CmdSorgu1.Parameters.Add("@fName1",
-                    SqlDbType.VarChar).Value = fName;
-                CmdSorgu1.Parameters.Add("@fInc1",
-                    SqlDbType.VarChar).Value = fInc;
-
-                Connect.Open();
-                int SorguSonucu1 = (int)CmdSorgu1.ExecuteScalar();
-                Connect.Close();
-
-                if (SorguSonucu1 == 0)
-                {
-                    string Update = "UPDATE kafeteryaMenu set FoodIncentives = @fInc " +
+                string Update = "UPDATE kafeteryaMenu set FoodIncentives = @fInc " +
                     "WHERE FoodName = @fName";
-                    SqlCommand CmdGuncelle = new SqlCommand(Update, Connect);
+                SqlCommand CmdGuncelle = new SqlCommand(Update, Connect);
 
-                    CmdGuncelle.Parameters.AddWithValue("@fInc", fInc);
-                    CmdGuncelle.Parameters.AddWithValue("@fName", fName);
+                CmdGuncelle.Parameters.AddWithValue("@fInc", fInc);
+                CmdGuncelle.Parameters.AddWithValue("@fName", dataGridView1.Rows[0].Cells[1].Value.ToString()); 
 
-                    Connect.Open();
-                    CmdGuncelle.ExecuteNonQuery();
-                    Connect.Close();
-
-                    string Read = "SELECT * FROM KafeteryaMenu " +
-                            "Where FoodName = @fName";
-
-                    SqlCommand ComReader = new SqlCommand(Read, Connect);
-                    ComReader.Parameters.Add("@fName",
-                        SqlDbType.VarChar).Value = fName;
+                if (MessageBox.Show(dataGridView1.Rows[0].Cells[0].Value + " | " +
+                    dataGridView1.Rows[0].Cells[1].Value + 
+                    " Düzenlemek istediğinize emin misiniz?".ToString(),
+                    "İşlem onayı", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+                {
 
                     Connect.Open();
-                    SqlDataReader DataReader = ComReader.ExecuteReader();
-                    DataReader.Read();
-                    MessageBox.Show(DataReader["FoodIncentives"] + " | " + fName + " Güncellenmiştir.");
-                    DataReader.Close();
+                    int EtkilenenSatirSayisi = CmdGuncelle.ExecuteNonQuery();
                     Connect.Close();
+                    if (EtkilenenSatirSayisi > 0)
+                    {
+                        MessageBox.Show(dataGridView1.Rows[0].Cells[1].Value.ToString() + " Düzenlenmiştir.");
 
-                    Sil();
+                        Sil();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Düzenleme işlemi iptal edilmiştir.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(fInc + " | " + fName + " Zaten doğru şekilde kaydedilmiştir");
+                    MessageBox.Show(dataGridView1.Rows[0].Cells[1].Value.ToString() + 
+                        " Düzenlenemedi, Belirtilen kayıt bulunamadı veya bir hata oluştu.");
                 }
             }
             else
             {
-                MessageBox.Show("Kayıt Bulunamamıştır");
+                MessageBox.Show("Birden fazla satır gözüküyor, Bu nedenle düzenleme işlemi iptal edilmiştir.");
             }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -233,7 +212,7 @@ namespace KafeteryaMenu
                 if (MessageBox.Show(dataGridView1.Rows[0].Cells[0].Value + " | " +
                     dataGridView1.Rows[0].Cells[1].Value + 
                     " Silmek istediğinize emin misiniz?".ToString(),
-                    "Silme", MessageBoxButtons.YesNo,
+                    "İşlem onayı", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
                 {
 
@@ -259,7 +238,7 @@ namespace KafeteryaMenu
             }
             else
             {
-                MessageBox.Show("Sadece 0. indeks gözüküyor, bu nedenle silemezsiniz.");
+                MessageBox.Show("Birden fazla satır gözüküyor, Bu nedenle silme işlemi iptal edilmiştir.");
             }
         }
 
