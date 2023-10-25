@@ -48,7 +48,7 @@ namespace KafeteryaMenu
         }
 
         static string ConString =
-            "Data Source=DESKTOP-5J370CT\\SYTRA;" +
+            "Data Source=DESKTOP-9578CDS\\SYTRASANDRO;" +
             "Initial Catalog=Kafeterya;Integrated Security=True";
         SqlConnection Connect = new SqlConnection(ConString);
 
@@ -103,7 +103,6 @@ namespace KafeteryaMenu
                         
                         MessageBox.Show(fInc + " | " + fName + 
                             " Menüye kaydedilmiştir.", "Bilgi");
-                        Yenile();
                         Sil();
                     }
                     else
@@ -145,7 +144,7 @@ namespace KafeteryaMenu
                       radioButton4.Checked ? radioButton4.Text :
                       radioButton5.Checked ? radioButton5.Text : "";
 
-            fName = textBox1.Text;
+            fName = textBox2.Text;
 
             string Sorgu = "SELECT COUNT(*) FROM KafeteryaMenu WHERE FoodName = @fName";
             SqlCommand CmdSorgu = new SqlCommand(Sorgu, Connect);
@@ -197,17 +196,70 @@ namespace KafeteryaMenu
                     DataReader.Close();
                     Connect.Close();
 
-                    Yenile();
                     Sil();
                 }
                 else
                 {
-                    MessageBox.Show(fInc + " " + fName + " Zaten doğru şekilde kaydedilmiştir");
+                    MessageBox.Show(fInc + " | " + fName + " Zaten doğru şekilde kaydedilmiştir");
                 }
             }
             else
             {
                 MessageBox.Show("Kayıt Bulunamamıştır");
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string fInc = "";
+            string fName = "";
+
+            fInc = radioButton1.Checked ? radioButton1.Text :
+                      radioButton2.Checked ? radioButton2.Text :
+                      radioButton3.Checked ? radioButton3.Text :
+                      radioButton4.Checked ? radioButton4.Text :
+                      radioButton5.Checked ? radioButton5.Text : "";
+
+            fName = textBox2.Text;
+
+            if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].Cells[1].Value != null)
+            {
+                string Delete = "DELETE FROM KafeteryaMenu " +
+                    "WHERE FoodName = @fName";
+
+                SqlCommand ComSil = new SqlCommand(Delete, Connect);
+                ComSil.Parameters.AddWithValue("@fName", 
+                    dataGridView1.Rows[0].Cells[1].Value.ToString());
+
+                if (MessageBox.Show(dataGridView1.Rows[0].Cells[0].Value + " | " +
+                    dataGridView1.Rows[0].Cells[1].Value + 
+                    " Silmek istediğinize emin misiniz?".ToString(),
+                    "Silme", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    Connect.Open();
+                    int EtkilenenSatirSayisi = ComSil.ExecuteNonQuery();
+                    Connect.Close();
+                    if (EtkilenenSatirSayisi > 0)
+                    {
+                        MessageBox.Show(dataGridView1.Rows[0].Cells[1].Value.ToString() + " Silinmiştir.");
+
+                        Sil();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Silme işlemi iptal edilmiştir.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(dataGridView1.Rows[0].Cells[1].Value.ToString() + 
+                        " Silinemedi. Belirtilen kayıt bulunamadı veya bir hata oluştu.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sadece 0. indeks gözüküyor, bu nedenle silemezsiniz.");
             }
         }
 
@@ -240,12 +292,30 @@ namespace KafeteryaMenu
         }
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            DataView dv = Dt.DefaultView;
+            if (!string.IsNullOrEmpty(textBox2.Text))
+            {
+                textBox2.Text = textBox2.Text.First().ToString().ToUpper() +
+                    textBox2.Text.Substring(1).ToLower();
+
+                textBox2.SelectionStart = textBox2.Text.Length;
+            }
+
+            DataView Dv = Dt.DefaultView;
 
             string filterExpression = string.Format("FoodName LIKE '{0}%'", textBox2.Text);
-            dv.RowFilter = filterExpression;
+            Dv.RowFilter = filterExpression;
 
-            dataGridView1.DataSource = dv;
+            dataGridView1.DataSource = Dv;
+        }
+        
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            label1.Visible = textBox2.Text == "" ? false : false;
+        }
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+
+            label1.Visible = textBox2.Text == "" ? true : false;
         }
 
         private void radioButtonAll_CheckedChanged(object sender, EventArgs e)
@@ -256,6 +326,8 @@ namespace KafeteryaMenu
 
             textBox1.Text = radioButton1.Checked ?
                 "İçecek adı" : "Yiyecek adı";
+
+            textBox1.ForeColor = Color.DimGray;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -289,10 +361,16 @@ namespace KafeteryaMenu
             radioButton5.Checked = false;
 
             textBox1.Text = "Lütfen tür seçiniz";
-            textBox1.ForeColor = Color.DimGray;
+            textBox1.ForeColor = Color.Gray;
             textBox1.Enabled = false;
 
+            textBox2.Text = "";
+
+            label1.Visible = true;
+
             ActiveControl = null;
+
+            Yenile();
         }
     }
 }

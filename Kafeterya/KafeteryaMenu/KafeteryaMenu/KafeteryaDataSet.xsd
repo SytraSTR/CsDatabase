@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="KafeteryaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="KafeteryaConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.KafeteryaMenu.Properties.Settings.GlobalReference.Default.KafeteryaConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="KafeteryaConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="KafeteryaConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.KafeteryaMenu.Properties.Settings.GlobalReference.Default.KafeteryaConnectionString1" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="KafeteryaMenuTableAdapter" GeneratorDataComponentClassName="KafeteryaMenuTableAdapter" Name="KafeteryaMenu" UserDataComponentName="KafeteryaMenuTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="KafeteryaConnectionString (Settings)" DbObjectName="Kafeterya.dbo.KafeteryaMenu" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="KafeteryaConnectionString1 (Settings)" DbObjectName="Kafeterya.dbo.KafeteryaMenu" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>INSERT INTO [dbo].[KafeteryaMenu] ([FoodIncentives], [FoodName]) VALUES (@FoodIncentives, @FoodName)</CommandText>
@@ -47,7 +47,7 @@
               <xs:element name="FoodIncentives" msprop:Generator_ColumnPropNameInRow="FoodIncentives" msprop:Generator_ColumnPropNameInTable="FoodIncentivesColumn" msprop:Generator_ColumnVarNameInTable="columnFoodIncentives" msprop:Generator_UserColumnName="FoodIncentives" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="15" />
+                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

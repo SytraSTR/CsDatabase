@@ -44,5 +44,16 @@ namespace KafeteryaMenu.Properties {
                 return ((string)(this["KafeteryaConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-9578CDS\\SYTRASANDRO;Initial Catalog=Kafeterya;Integrated Secu" +
+            "rity=True")]
+        public string KafeteryaConnectionString1 {
+            get {
+                return ((string)(this["KafeteryaConnectionString1"]));
+            }
+        }
     }
 }

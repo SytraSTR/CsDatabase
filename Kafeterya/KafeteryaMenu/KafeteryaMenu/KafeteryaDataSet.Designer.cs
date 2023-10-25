@@ -407,7 +407,7 @@ namespace KafeteryaMenu {
                 base.Columns.Add(this.columnFoodIncentives);
                 this.columnFoodName = new global::System.Data.DataColumn("FoodName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFoodName);
-                this.columnFoodIncentives.MaxLength = 15;
+                this.columnFoodIncentives.MaxLength = 50;
                 this.columnFoodName.MaxLength = 50;
             }
             
@@ -781,7 +781,7 @@ namespace KafeteryaMenu.KafeteryaDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::KafeteryaMenu.Properties.Settings.Default.KafeteryaConnectionString;
+            this._connection.ConnectionString = global::KafeteryaMenu.Properties.Settings.Default.KafeteryaConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
