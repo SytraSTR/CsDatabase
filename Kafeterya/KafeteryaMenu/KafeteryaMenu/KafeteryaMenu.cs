@@ -135,15 +135,12 @@ namespace KafeteryaMenu
         private void button2_Click(object sender, EventArgs e)
         {
             string fInc = "";
-            string fName = "";
             string fName1 = "";
             fInc = radioButton1.Checked ? radioButton1.Text :
                       radioButton2.Checked ? radioButton2.Text :
                       radioButton3.Checked ? radioButton3.Text :
                       radioButton4.Checked ? radioButton4.Text :
                       radioButton5.Checked ? radioButton5.Text : "";
-
-            fName = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
 
             fName1 = textBox1.Text;
 
@@ -164,11 +161,15 @@ namespace KafeteryaMenu
                         "İşlem onayı", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        CmdGuncelle.Parameters.AddWithValue("@fName", fName);
+                        CmdGuncelle.Parameters.AddWithValue("@fName", dataGridView1.SelectedRows[0].Cells[1].Value);
 
                         if (textBox1.Text != "" && textBox1.Text != "Lütfen tür seçiniz" && textBox1.Text != "Yiyecek adı" && textBox1.Text != "İçecek adı")
                         {
                             CmdGuncelle.Parameters.AddWithValue("@fName1", fName1);
+                        }
+                        else
+                        {
+                            CmdGuncelle.Parameters.AddWithValue("@fName1", dataGridView1.SelectedRows[0].Cells[1].Value);
                         }
 
                         Connect.Open();
@@ -199,13 +200,15 @@ namespace KafeteryaMenu
                         "İşlem onayı", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+                        CmdGuncelle.Parameters.AddWithValue("@fName", dataGridView1.Rows[0].Cells[1].Value);
+
                         if (textBox1.Text != "" && textBox1.Text != "Lütfen tür seçiniz" && textBox1.Text != "Yiyecek adı" && textBox1.Text != "İçecek adı")
                         {
-                            CmdGuncelle.Parameters.AddWithValue("@fName", textBox1.Text);
+                            CmdGuncelle.Parameters.AddWithValue("@fName1", fName1);
                         }
                         else
                         {
-                            CmdGuncelle.Parameters.AddWithValue("@fName", dataGridView1.Rows[0].Cells[1].Value.ToString());
+                            CmdGuncelle.Parameters.AddWithValue("@fName1", dataGridView1.Rows[0].Cells[1].Value);
                         }
 
                         Connect.Open();
