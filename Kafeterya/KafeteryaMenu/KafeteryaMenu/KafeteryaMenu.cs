@@ -15,9 +15,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KafeteryaMenu
 {
-    public partial class Form1 : Form
+    public partial class KafeteryaMenu : Form
     {
-        public Form1()
+        public KafeteryaMenu()
         {
             InitializeComponent();
         }
@@ -49,7 +49,7 @@ namespace KafeteryaMenu
             Mouse_Move = 0;
         }
 
-        static string DBFilePatch = "DESKTOP-9578CDS\\SYTRASANDRO;Initial Catalog=CafeteriaDB;Integrated Security=True";
+        static string DBFilePatch = "";//Lütfen Database'nizin ConectionStringini "DESKTOP" tan itibaren " " içine yazınız
         static string ConString = "Data Source="+DBFilePatch;
         SqlConnection Connect = new SqlConnection(ConString);
 

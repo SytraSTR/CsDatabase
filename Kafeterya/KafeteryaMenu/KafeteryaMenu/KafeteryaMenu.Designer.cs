@@ -1,6 +1,6 @@
 ﻿namespace KafeteryaMenu
 {
-    partial class Form1
+    partial class KafeteryaMenu
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
