@@ -170,11 +170,6 @@ namespace KafeteryaMenu
                         {
                             CmdGuncelle.Parameters.AddWithValue("@fName1", fName1);
                         }
-                        else
-                        {
-                            
-                        }
-                        
 
                         Connect.Open();
                         int EtkilenenSatirSayisi = CmdGuncelle.ExecuteNonQuery();
